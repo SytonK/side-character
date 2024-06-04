@@ -10,10 +10,17 @@ script/source = "extends CharacterBody2D
 
 @export var movement_speed: float = 300
 
+@export var jump_strength: float = 800
+
+
 func _physics_process(delta):
 	_apply_gravity(delta)
 	_side_movment()
 	move_and_slide()
+
+func _input(event):
+	if event.is_action_pressed(\"jump\"):
+		_jump()
 
 
 func _apply_gravity(delta):
@@ -22,6 +29,10 @@ func _apply_gravity(delta):
 
 func _side_movment():
 	velocity.x = (Input.get_action_strength(\"move_right\") - Input.get_action_strength(\"move_left\")) * movement_speed
+
+func _jump():
+	if is_on_floor():
+		velocity.y = -jump_strength
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xc7w2"]
