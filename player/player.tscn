@@ -21,6 +21,8 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_action_pressed(\"jump\"):
 		_jump()
+	if event.is_action_released(\"jump\"):
+		_stop_jump()
 
 
 func _apply_gravity(delta):
@@ -33,6 +35,9 @@ func _side_movment():
 func _jump():
 	if is_on_floor():
 		velocity.y = -jump_strength
+
+func _stop_jump():
+	velocity.y = max(velocity.y, 0)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xc7w2"]
