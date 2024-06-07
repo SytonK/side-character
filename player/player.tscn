@@ -15,10 +15,31 @@ script/source = "extends CharacterBody2D
 @export var double_jump_strength: float = 500
 var can_double_jump: bool = true
 
+@onready var dash_duration_timer = $DashDurationTimer
+@export var dash_strength: float = 900
+@export var dash_duration: float = 0.2
+enum {
+	LEFT,
+	RIGTH
+}
+var direction = RIGTH
+var is_dashing: bool = false
+var can_dash: bool = true
+
+@export var stop_dash_on_jump: bool = true
+
+@export var dash_cooldown: float = 0.75
+@onready var dash_cooldown_timer = $DashCooldownTimer
+
+
+
+func _ready():
+	_init_dash()
 
 func _physics_process(delta):
 	_apply_gravity(delta)
-	_side_movment()
+	if !is_dashing:
+		_side_movment()
 	_recharg_double_jump()
 	move_and_slide()
 
@@ -27,6 +48,8 @@ func _input(event):
 		_jump()
 	if event.is_action_released(\"jump\"):
 		_stop_jump()
+	if event.is_action_pressed(\"dash\"):
+		_dash()
 
 
 func _apply_gravity(delta):
@@ -36,6 +59,10 @@ func _apply_gravity(delta):
 
 func _side_movment():
 	velocity.x = (Input.get_action_strength(\"move_right\") - Input.get_action_strength(\"move_left\")) * movement_speed
+	if velocity.x > 0:
+		direction = RIGTH
+	elif velocity.x < 0:
+		direction = LEFT
 
 
 func _jump():
@@ -43,6 +70,8 @@ func _jump():
 		_perform_jump()
 	elif can_double_jump:
 		_perform_double_jump()
+	if stop_dash_on_jump:
+		is_dashing = false
 
 func _perform_jump():
 	velocity.y = -jump_strength
@@ -57,6 +86,25 @@ func _stop_jump():
 func _recharg_double_jump():
 	if is_on_floor():
 		can_double_jump = true
+
+
+func _init_dash():
+	dash_duration_timer.wait_time = dash_duration
+	dash_cooldown_timer.wait_time = dash_cooldown
+
+func _dash():
+	if can_dash:
+		is_dashing = true
+		can_dash = false
+		dash_cooldown_timer.start()
+		velocity.x = (1 if direction == RIGTH else -1) * dash_strength
+		dash_duration_timer.start()
+
+func _on_dash_duration_timer_timeout():
+	is_dashing = false
+
+func _on_dash_cooldown_timer_timeout():
+	can_dash = true
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xc7w2"]
@@ -72,3 +120,10 @@ shape = SubResource("RectangleShape2D_xc7w2")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0.627451, 0.784314, 1)
 texture = ExtResource("1_fhntq")
+
+[node name="DashDurationTimer" type="Timer" parent="."]
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="DashDurationTimer" to="." method="_on_dash_duration_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
