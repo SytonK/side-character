@@ -6,3 +6,4 @@ class_name Player extends CharacterBody2D
 @export var friction: float
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+

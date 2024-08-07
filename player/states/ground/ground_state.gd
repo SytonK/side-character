@@ -1,7 +1,4 @@
-class_name GroundState extends State
-
-
-@onready var player: Player = owner
+class_name GroundState extends PlayerState
 
 
 func physics_process(_delta: float) -> void:
