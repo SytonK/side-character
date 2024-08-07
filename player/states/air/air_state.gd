@@ -1,0 +1,18 @@
+class_name AirState extends PlayerState
+
+
+@export var mid_jump_deviation: float = 50
+
+
+func physics_process(_delta: float) -> void:
+	_calc_animation()
+	player.move_and_slide()
+
+
+func _calc_animation() -> void:
+	if player.velocity.y > mid_jump_deviation:
+		player.animation_player.play('fall')
+	elif player.velocity.y < -mid_jump_deviation:
+		player.animation_player.play('jump')
+	else:
+		player.animation_player.play('mid_jump')

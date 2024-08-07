@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3x2k268mc5nt"]
+[gd_scene load_steps=13 format=3 uid="uid://c3x2k268mc5nt"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pi51t"]
 [ext_resource type="Texture2D" uid="uid://cmwttcoeekmed" path="res://player/assets/Player Idle 48x48.png" id="1_xyhqq"]
 [ext_resource type="Script" path="res://finite state machine/finite_state_machine.gd" id="2_visth"]
 [ext_resource type="Script" path="res://player/states/ground/ground_state.gd" id="3_6n5wo"]
+[ext_resource type="Script" path="res://player/states/air/air_state.gd" id="5_4s5js"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i1l2k"]
 size = Vector2(20, 32)
@@ -113,10 +114,22 @@ tracks/3/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_5kuji"]
+resource_name = "fall"
+
+[sub_resource type="Animation" id="Animation_4v2ue"]
+resource_name = "jump"
+
+[sub_resource type="Animation" id="Animation_ve1bm"]
+resource_name = "mid_jump"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqxai"]
 _data = {
 "RESET": SubResource("Animation_16amu"),
-"idle": SubResource("Animation_sws01")
+"fall": SubResource("Animation_5kuji"),
+"idle": SubResource("Animation_sws01"),
+"jump": SubResource("Animation_4v2ue"),
+"mid_jump": SubResource("Animation_ve1bm")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -140,3 +153,6 @@ initial_state = NodePath("GroundState")
 
 [node name="GroundState" type="Node" parent="FiniteStataMachine"]
 script = ExtResource("3_6n5wo")
+
+[node name="AirState" type="Node" parent="FiniteStataMachine"]
+script = ExtResource("5_4s5js")
