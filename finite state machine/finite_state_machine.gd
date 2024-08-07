@@ -6,7 +6,7 @@ extends Node
 var states: Dictionary = {}
 var current_state: State
 
-func ready() -> void:
+func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name] = child

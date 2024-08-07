@@ -1,10 +1,8 @@
 class_name Player extends CharacterBody2D
 
 
-@onready var finite_stata_machine: FiniteStataMachine = $FiniteStataMachine
+@export var max_speed: float
+@export var acceleration: float
+@export var friction: float
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
-
-func _ready() -> void:
-	finite_stata_machine.ready()
