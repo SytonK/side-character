@@ -4,8 +4,10 @@ class_name AirState extends PlayerState
 @export var mid_jump_deviation: float = 50
 
 
-func physics_process(_delta: float) -> void:
+func physics_process(delta: float) -> void:
 	_calc_animation()
+	
+	player.apply_gravity(delta)
 	player.move_and_slide()
 
 
