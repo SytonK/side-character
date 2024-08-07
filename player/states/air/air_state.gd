@@ -5,6 +5,7 @@ class_name AirState extends PlayerState
 
 
 func physics_process(delta: float) -> void:
+	_calc_state()
 	_calc_animation()
 	
 	player.apply_gravity(delta)
@@ -18,3 +19,7 @@ func _calc_animation() -> void:
 		player.animation_player.play('jump')
 	else:
 		player.animation_player.play('mid_jump')
+
+func _calc_state() -> void:
+	if player.velocity.y == 0:
+		transition.emit('GroundState')
