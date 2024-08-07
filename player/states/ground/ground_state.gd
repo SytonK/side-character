@@ -12,5 +12,5 @@ func _calc_animation() -> void:
 
 
 func _calc_state() -> void:
-	if player.velocity.y != 0:
+	if !player.is_on_floor():
 		transition.emit('AirState')
