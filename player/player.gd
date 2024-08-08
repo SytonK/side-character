@@ -10,6 +10,3 @@ class_name Player extends CharacterBody2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-
-func apply_gravity(dalta: float) -> void:
-	velocity.y = max(velocity.y + gravity_force * dalta, max_fall_speed)

@@ -8,7 +8,7 @@ func physics_process(delta: float) -> void:
 	_calc_state()
 	_calc_animation()
 	
-	player.apply_gravity(delta)
+	apply_gravity(delta)
 	player.move_and_slide()
 
 
@@ -23,3 +23,7 @@ func _calc_animation() -> void:
 func _calc_state() -> void:
 	if player.velocity.y == 0:
 		transition.emit('GroundState')
+
+
+func apply_gravity(dalta: float) -> void:
+	player.velocity.y = max(player.velocity.y + player.gravity_force * dalta, player.max_fall_speed)
