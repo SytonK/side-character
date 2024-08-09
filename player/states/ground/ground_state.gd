@@ -1,11 +1,11 @@
 class_name GroundState extends PlayerState
 
 
-func physics_process(_delta: float) -> void:
+func physics_process(delta: float) -> void:
 	_calc_animation()
 	_calc_state()
 	
-	player.side_velocity()
+	player.side_velocity(delta)
 	player.move_and_slide()
 
 

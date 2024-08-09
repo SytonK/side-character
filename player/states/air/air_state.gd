@@ -9,7 +9,7 @@ func physics_process(delta: float) -> void:
 	_calc_animation()
 	
 	apply_gravity(delta)
-	player.side_velocity()
+	player.side_velocity(delta)
 	player.move_and_slide()
 
 
