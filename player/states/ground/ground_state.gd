@@ -5,6 +5,7 @@ func physics_process(_delta: float) -> void:
 	_calc_animation()
 	_calc_state()
 	
+	player.side_velocity()
 	player.move_and_slide()
 
 

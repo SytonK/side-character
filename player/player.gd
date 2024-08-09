@@ -10,3 +10,10 @@ class_name Player extends CharacterBody2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+
+func side_velocity() -> void:
+	var side_input_strength = Input.get_action_strength('move_right') - Input.get_action_strength("move_left")
+	if side_input_strength == 0:
+		print('apply friction')
+	else:
+		print('apply aceleration')
