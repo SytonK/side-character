@@ -10,7 +10,10 @@ func physics_process(delta: float) -> void:
 
 
 func _calc_animation() -> void:
-	player.animation_player.play('idle')
+	if player.velocity.x == 0:
+		player.animation_player.play('idle')
+	else:
+		player.animation_player.play('run')
 
 func _calc_state() -> void:
 	if !player.is_on_floor():
