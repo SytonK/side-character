@@ -27,4 +27,4 @@ func _calc_state() -> void:
 
 
 func apply_gravity(dalta: float) -> void:
-	player.velocity.y = max(player.velocity.y + player.gravity_force * dalta, player.max_fall_speed)
+	player.velocity.y = min(player.velocity.y + player.gravity_force * dalta, player.max_fall_speed)
