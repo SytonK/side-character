@@ -8,8 +8,8 @@ enum DIRECTION {LEFT, RIGHT}
 @export var gravity_force: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var max_speed: float = 400
-@export var acceleration: float = 800
-@export var friction: float = 600
+@export var acceleration: float = 1600
+@export var friction: float = 1200
 
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
