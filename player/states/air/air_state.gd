@@ -13,6 +13,11 @@ func physics_process(delta: float) -> void:
 	player.move_and_slide()
 
 
+func input(event: InputEvent) -> void:
+	if event.is_action_released("jump"):
+		_stop_jump()
+
+
 func _calc_animation() -> void:
 	if player.velocity.y > mid_jump_deviation:
 		player.animation_player.play('fall')
@@ -29,3 +34,7 @@ func _calc_state() -> void:
 func _apply_gravity(dalta: float) -> void:
 	player.velocity.y = min(player.velocity.y + player.gravity_force * dalta, player.max_fall_speed)
 
+
+func _stop_jump() -> void:
+	if player.velocity.y < 0:
+		player.velocity.y = 0
