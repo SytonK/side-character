@@ -1,6 +1,12 @@
 class_name GroundState extends PlayerState
 
 
+var next_animation_name: String
+
+
+func enter() -> void:
+	next_animation_name = 'land' #cant play animation here 
+
 func physics_process(delta: float) -> void:
 	_calc_animation()
 	_calc_state()
@@ -14,10 +20,14 @@ func input(event: InputEvent) -> void:
 
 
 func _calc_animation() -> void:
-	if player.velocity.x == 0:
-		player.animation_player.play('idle')
+	if next_animation_name == 'land' && player.animation_player.is_playing():
+		pass
+	elif player.velocity.x == 0:
+		next_animation_name = 'idle'
 	else:
-		player.animation_player.play('run')
+		next_animation_name = 'run'
+	
+	player.animation_player.play(next_animation_name)
 
 func _calc_state() -> void:
 	if !player.is_on_floor():
