@@ -15,13 +15,14 @@ enum DIRECTION {LEFT, RIGHT}
 
 @export var air_jump_force: float = 400
 @export var max_air_jumps: int = 1
-@onready var air_jumps: int = max_air_jumps
 
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 var direction: DIRECTION = DIRECTION.RIGHT: set  = _on_change_direction
+
+@onready var air_jumps: int = max_air_jumps
 
 
 func side_velocity(delta: float) -> void:

@@ -8,7 +8,6 @@ func physics_process(delta: float) -> void:
 	player.side_velocity(delta)
 	player.move_and_slide()
 
-
 func input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		_jump()

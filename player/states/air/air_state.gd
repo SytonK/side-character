@@ -33,6 +33,7 @@ func _calc_animation() -> void:
 	else:
 		player.animation_player.play('mid_jump')
 
+
 func _calc_state() -> void:
 	if player.is_on_floor(): 
 		transition.emit('GroundState')
