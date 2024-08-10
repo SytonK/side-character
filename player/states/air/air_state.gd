@@ -23,6 +23,10 @@ func input(event: InputEvent) -> void:
 
 
 func _calc_animation() -> void:
+	if player.animation_player.is_playing() && player.animation_player.current_animation == 'air_jump':
+		return
+	
+	print(player.animation_player.current_animation)
 	if player.velocity.y > mid_jump_deviation:
 		player.animation_player.play('fall')
 	elif player.velocity.y < -mid_jump_deviation:
@@ -31,7 +35,7 @@ func _calc_animation() -> void:
 		player.animation_player.play('mid_jump')
 
 func _calc_state() -> void:
-	if player.is_on_floor():
+	if player.is_on_floor(): 
 		transition.emit('GroundState')
 
 
@@ -43,6 +47,7 @@ func _air_jump() -> void:
 	if player.air_jumps > 0:
 		player.air_jumps -= 1
 		player.velocity.y = -player.air_jump_force
+		player.animation_player.play('air_jump')
 
 func _reset_air_jumps() -> void:
 	player.air_jumps = player.max_air_jumps
