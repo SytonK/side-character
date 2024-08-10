@@ -43,8 +43,3 @@ func _apply_friction(delta: float) -> void:
 func _on_change_direction(new_directoin: DIRECTION) -> void:
 	direction = new_directoin
 	sprite_2d.flip_h = direction != DIRECTION.RIGHT
-
-
-func jump() -> void:
-	if is_on_floor():
-		velocity.y = -jump_force

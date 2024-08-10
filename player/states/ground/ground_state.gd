@@ -11,7 +11,7 @@ func physics_process(delta: float) -> void:
 
 func input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
-		player.jump()
+		_jump()
 
 
 func _calc_animation() -> void:
@@ -23,3 +23,7 @@ func _calc_animation() -> void:
 func _calc_state() -> void:
 	if !player.is_on_floor():
 		transition.emit('AirState')
+
+
+func _jump() -> void:
+	player.velocity.y = -player.jump_force
