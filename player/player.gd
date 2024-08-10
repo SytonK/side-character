@@ -13,6 +13,10 @@ enum DIRECTION {LEFT, RIGHT}
 
 @export var jump_force: float = 600
 
+@export var air_jump_force: float = 400
+@export var max_air_jumps: int = 1
+@onready var air_jumps: int = max_air_jumps
+
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
