@@ -26,7 +26,6 @@ func _calc_animation() -> void:
 	if player.animation_player.is_playing() && player.animation_player.current_animation == 'air_jump':
 		return
 	
-	print(player.animation_player.current_animation)
 	if player.velocity.y > mid_jump_deviation:
 		player.animation_player.play('fall')
 	elif player.velocity.y < -mid_jump_deviation:
