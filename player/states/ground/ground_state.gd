@@ -9,6 +9,11 @@ func physics_process(delta: float) -> void:
 	player.move_and_slide()
 
 
+func input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump"):
+		player.jump()
+
+
 func _calc_animation() -> void:
 	if player.velocity.x == 0:
 		player.animation_player.play('idle')

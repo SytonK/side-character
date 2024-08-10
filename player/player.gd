@@ -11,6 +11,8 @@ enum DIRECTION {LEFT, RIGHT}
 @export var acceleration: float = 1600
 @export var friction: float = 1200
 
+@export var jump_force: float = 600
+
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -41,3 +43,8 @@ func _apply_friction(delta: float) -> void:
 func _on_change_direction(new_directoin: DIRECTION) -> void:
 	direction = new_directoin
 	sprite_2d.flip_h = direction != DIRECTION.RIGHT
+
+
+func jump() -> void:
+	if is_on_floor():
+		velocity.y = -jump_force

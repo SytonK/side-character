@@ -1,7 +1,7 @@
 class_name AirState extends PlayerState
 
 
-@export var mid_jump_deviation: float = 50
+const mid_jump_deviation: float = 100
 
 
 func physics_process(delta: float) -> void:
