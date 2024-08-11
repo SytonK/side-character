@@ -8,12 +8,12 @@ func enter() -> void:
 	_reset_air_jumps()
 
 func physics_process(delta: float) -> void:
-	_calc_state()
-	_calc_animation()
-	
 	_apply_gravity(delta)
 	player.side_velocity(delta)
 	player.move_and_slide()
+	
+	_calc_animation()
+	_calc_state()
 
 func input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
