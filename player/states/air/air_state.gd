@@ -16,10 +16,12 @@ func physics_process(delta: float) -> void:
 	_calc_state()
 
 func input(event: InputEvent) -> void:
-	if event.is_action_pressed("jump"):
-		_air_jump()
 	if event.is_action_released("jump"):
 		_stop_jump()
+	if event.is_action_pressed("jump"):
+		_air_jump()
+	elif event.is_action_pressed("dash"):
+		player.dash()
 
 
 func _calc_animation() -> void:

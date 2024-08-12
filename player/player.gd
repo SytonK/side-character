@@ -16,13 +16,19 @@ enum DIRECTION {LEFT, RIGHT}
 @export var air_jump_force: float = 400
 @export var max_air_jumps: int = 1
 
+@export var dash_strength: float = 1600
+@export var dash_cooldown: float = 1.5
+
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var finite_stata_machine: FiniteStataMachine = $FiniteStataMachine
 
 var direction: DIRECTION = DIRECTION.RIGHT: set  = _on_change_direction
 
 @onready var air_jumps: int = max_air_jumps
+
+var is_dash_on_cooldown: bool = false
 
 
 func side_velocity(delta: float) -> void:
@@ -48,3 +54,9 @@ func _apply_friction(delta: float) -> void:
 func _on_change_direction(new_directoin: DIRECTION) -> void:
 	direction = new_directoin
 	sprite_2d.flip_h = direction != DIRECTION.RIGHT
+
+
+func dash() ->  void:
+	if !is_dash_on_cooldown:
+		is_dash_on_cooldown = true
+		finite_stata_machine._transition('Dash')
