@@ -17,6 +17,7 @@ enum DIRECTION {LEFT, RIGHT}
 @export var max_air_jumps: int = 1
 
 @export var dash_strength: float = 1600
+@export var dash_duration: float = .3
 @export var dash_cooldown: float = 1.5
 
 
