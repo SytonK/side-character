@@ -59,4 +59,4 @@ func _on_change_direction(new_directoin: DIRECTION) -> void:
 func dash() ->  void:
 	if !is_dash_on_cooldown:
 		is_dash_on_cooldown = true
-		finite_stata_machine._transition('Dash')
+		finite_stata_machine.transition('Dash')

@@ -10,7 +10,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name] = child
-			child.transition.connect(_transition)
+			child.transition.connect(transition)
 	
 	if initial_state:
 		initial_state.enter()
@@ -29,7 +29,7 @@ func _input(event: InputEvent) -> void:
 		current_state.input(event)
 
 
-func _transition(new_state_name: String) -> void:
+func transition(new_state_name: String) -> void:
 	var new_state = states.get(new_state_name)
 	if !new_state:
 		return
